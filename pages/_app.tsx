@@ -9,6 +9,18 @@ import { activeRouteData } from "@utils/routes";
 import Head from "next/head";
 import { Meta } from "@components/Meta";
 import { useDarkMode } from "@hooks/useDarkMode";
+import { loader } from "@monaco-editor/react";
+
+// 配置 Monaco Editor 使用本地文件而不是 CDN
+// 根据 basePath 动态设置路径
+if (typeof window !== "undefined") {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  loader.config({
+    paths: {
+      vs: `${basePath}/monaco-editor/min/vs`
+    }
+  });
+}
 
 const logo = (
   <svg
@@ -104,32 +116,7 @@ export default function App(props) {
             />
           </Tooltip>
         </Pane>
-        <Pane display="flex" alignItems={"center"}>
-          <a
-            style={{
-              display: "inline-block",
-              height: 20
-            }}
-            href="https://github.com/ritz078/transform"
-          >
-            <img
-              src="https://img.shields.io/github/stars/ritz078/transform?style=social"
-              alt=""
-            />
-          </a>
 
-          <a href="https://github.com/ritz078/transform" target="_blank">
-            <Button
-              appearance="minimal"
-              height={40}
-              css={{
-                color: "#fff !important"
-              }}
-            >
-              GitHub
-            </Button>
-          </a>
-        </Pane>
       </Pane>
 
       <Pane

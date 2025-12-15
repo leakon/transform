@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  transform:
+    build: .
+    container_name: transform-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    restart: unless-stopped
+    # 如果需要持久化日志，取消下面的注释
+    # volumes:
+    #   - ./logs:/app/logs
+

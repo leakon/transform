@@ -3,7 +3,7 @@ import * as React from "react";
 import { useCallback } from "react";
 import { useSettings } from "@hooks/useSettings";
 import Form, { InputType } from "@components/Form";
-import request from "@utils/request";
+import { htmlToPug } from "@utils/clientTransformers";
 
 const formFields = [
   {
@@ -54,11 +54,7 @@ export default function HtmlToPug() {
   }, []);
 
   const transformer = useCallback(
-    ({ value }) =>
-      request("/api/html-to-pug", {
-        value,
-        settings
-      }),
+    ({ value }) => htmlToPug(value, settings),
     [settings]
   );
 

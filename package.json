@@ -10,6 +10,10 @@
     "start": "next start",
     "format": "prettier --write '**/*.ts' '**/*.tsx'",
     "build": "next build",
+    "copy-monaco": "node scripts/copy-monaco.js",
+    "build:static": "yarn copy-monaco && next build && next export",
+    "build:static:legacy": "yarn copy-monaco && node --openssl-legacy-provider node_modules/.bin/next build && node --openssl-legacy-provider node_modules/.bin/next export",
+    "export": "next build",
     "now-build": "next build",
     "postinstall": "patch-package",
     "build:analyze": "ANALYZE=true yarn build"
@@ -75,6 +79,7 @@
     "jsonschema-protobuf": "^1.0.2",
     "lodash": "^4.17.21",
     "markdown": "^0.5.0",
+    "monaco-editor": "^0.25.2",
     "next": "10.2.3",
     "nprogress": "^0.2.0",
     "postcss": "^8.3.5",

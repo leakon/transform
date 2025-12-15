@@ -1,16 +1,11 @@
 import ConversionPanel from "@components/ConversionPanel";
 import * as React from "react";
 import { useCallback } from "react";
-import request from "@utils/request";
-import { Alert } from "evergreen-ui";
+import { flowToTypeScript } from "@utils/clientTransformers";
 
 export default function FlowToTypescriptDeclaration() {
   const transformer = useCallback(
-    ({ value }) =>
-      request("/api/flow-to-typescript", {
-        value,
-        declarationOnly: true
-      }),
+    ({ value }) => flowToTypeScript(value, true, false),
     []
   );
 
@@ -22,14 +17,6 @@ export default function FlowToTypescriptDeclaration() {
       editorDefaultValue="flow"
       resultTitle="TypeScript Declarations"
       resultLanguage={"typescript"}
-      resultEditorProps={{
-        topNotifications: () => (
-          <Alert
-            backgroundColor="#e7f7ff"
-            title="This code is converted on the server."
-          />
-        )
-      }}
     />
   );
 }
